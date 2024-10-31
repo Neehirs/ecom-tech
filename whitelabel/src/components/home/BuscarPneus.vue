@@ -1,7 +1,7 @@
 <template>
     <div class="product-one">
         <div class="container">
-            <h3 class="product-one__title title-red">BUSCAR PNEUS</h3>
+            <h3 class="product-one__title ">BUSCAR PNEUS</h3>
             <section class="tire-search" :style="{ backgroundImage: `url(${backgroundImage})` }">
                 <div class="container">
                     <div class="search-container">

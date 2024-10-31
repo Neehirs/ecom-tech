@@ -49,15 +49,15 @@
       const carousel = ref(null);
       const slides = [
         {
-          background: require('@/assets/images/shapes/slider-4-1.png'),
+          background: require('@/assets/images/shapes/slider-4-1.webp'),
           topTitle: 'Desperte o potencial da sua marca!',
           subTitle: 'Crie uma experiência de compra única para seus clientes',
           text: 'Conecte-se de forma significativa e personalizada.',
           price: 290,
-          image: require('@/assets/images/ecommerce.webp')
+          image: require('@/assets/images/ecommerce.png')
         },
         {
-          background: require('@/assets/images/shapes/slider-4-1.png'),
+          background: require('@/assets/images/shapes/slider-4-1.webp'),
           topTitle: 'Transforme sua visão em realidade!',
           subTitle: 'Aproveite as oportunidades do mundo digital.',
           text: 'Lance seu e-commerce com facilidade e estilo.',
@@ -65,12 +65,12 @@
           image: require('@/assets/images/ecommerce.avif')
         },
         {
-          background: require('@/assets/images/shapes/slider-4-1.png'),
+          background: require('@/assets/images/shapes/slider-4-1.webp'),
           topTitle: 'Sua marca, seu sucesso!',
           subTitle: 'Inicie sua jornada e conquiste o mercado online!',
           text: 'Construa um e-commerce sob medida para você.',
           price: 290,
-          image: require('@/assets/images/ecommerce.jpg')
+          image: require('@/assets/images/ecommerce.png')
         }
       ];
   

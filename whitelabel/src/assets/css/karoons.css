@@ -8691,35 +8691,58 @@ body.megamenu-popup-active .mobile-nav__content {
   
 }
 .product-one__title {
-  font-size: 24px;
-  letter-spacing: -0.48px;
-  text-transform: uppercase;
-  font-weight: 700;
-  margin: 0 0 55px;
-  position: relative;
+  font-size: 32px; /* Tamanho da fonte */
+  letter-spacing: -0.5px; /* Espaçamento entre letras */
+  text-transform: uppercase; /* Transformação do texto */
+  font-weight: 700; /* Peso da fonte */
+  margin: 0 0 40px; /* Margem inferior */
+  position: relative; /* Para posicionar os pseudo-elementos */
+  color: var(--karoons-primary-color, #333); /* Cor do texto */
+  text-align: center; /* Centraliza o texto */
+  transition: color 0.3s ease; /* Transição suave para hover */
 }
+
+.product-one__title:hover {
+  color: var(--karoons-secondary-color, #0066cc); /* Cor ao passar o mouse */
+}
+
 @media (max-width: 767px) {
   .product-one__title {
-    margin-bottom: 35px;
+    margin-bottom: 30px; /* Ajusta a margem inferior em telas menores */
+    font-size: 28px; /* Ajusta o tamanho da fonte para telas menores */
   }
 }
+
+.product-one__title::before,
 .product-one__title::after {
-  position: absolute;
-  right: 1px;
-  top: 0;
-  bottom: 0;
-  margin: auto;
-  width: calc(100% - 290px);
-  height: 2px;
-  content: "";
-  background-color: var(--karoons-border-color, #DEDEDE);
+  content: ""; /* Necessário para criar os pseudo-elementos */
+  position: absolute; /* Para posicionar as linhas */
+  top: 50%; /* Centraliza verticalmente */
+  height: 2px; /* Altura das linhas */
+  background-color: var(--karoons-border-color, #DEDEDE); /* Cor das linhas */
+  width: calc(50% - 10px); /* Largura das linhas */
 }
+
+.product-one__title::before {
+  left: -80px; /* Aumenta a distância da linha à esquerda */
+}
+
+.product-one__title::after {
+  right: -80px; /* Aumenta a distância da linha à direita */
+}
+
+.product-one__title:hover::before,
+.product-one__title:hover::after {
+  width: calc(50% - 5px); /* Aumenta a largura das linhas ao passar o mouse */
+}
+
 @media (max-width: 991px) {
+  .product-one__title::before,
   .product-one__title::after {
-    width: calc(100% - 290px);
-    right: 0;
+    width: calc(50% - 10px); /* Ajusta a largura das linhas em telas médias */
   }
 }
+
 .product-one__categories {
   position: relative;
   background-color: var(--karoons-black, #212226);
@@ -14267,7 +14290,7 @@ body.megamenu-popup-active .mobile-nav__content {
   position: relative;
 }
 .main-slider-four__top__title {
-  color: var(--karoons-white, #fff);
+  color: var(--karoons-black2, #fff);
   font-size: 50px;
   font-weight: 700;
   text-transform: uppercase;
@@ -14280,7 +14303,7 @@ body.megamenu-popup-active .mobile-nav__content {
   transform: translateX(-200px);
 }
 .main-slider-four__top__sub-title {
-  color: var(--karoons-white, #fff);
+  color: var(--karoons-black2, #fff);
   font-size: 16px;
   font-weight: 600;
   letter-spacing: 0.48px;
@@ -14291,7 +14314,7 @@ body.megamenu-popup-active .mobile-nav__content {
   transform: translateX(200px);
 }
 .main-slider-four__title {
-  color: var(--karoons-white, #fff);
+  color: var(--karoons-black2, #fff);
   font-size: 128px;
   font-weight: 800;
   line-height: 110px;

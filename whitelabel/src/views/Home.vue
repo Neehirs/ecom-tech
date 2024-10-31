@@ -3,8 +3,9 @@
       <Banner1 />
       <Marcas />
       <Banner2 />
-      <BannerDuplo />
+      
       <Destaques />
+      <BannerDuplo />
       
     </div>
   </template>

@@ -1,7 +1,7 @@
 <template>
     <section class="product-one">
         <div class="container-carousel">
-            <h3 class="product-one__title title-red">Destaques</h3>
+            <h3 class="product-one__title ">Destaques</h3>
             <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
                     <div class="carousel-item" :class="{ active: index === 0 }" v-for="(productChunk, index) in chunkedProducts" :key="index">

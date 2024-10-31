@@ -3,7 +3,7 @@
     <div class="container-carousel">
       <div class="product-two__top">
         <div class="container">
-          <h3 class="product-one__title title-red">MARCAS</h3>
+          <h3 class="product-one__title">MARCAS</h3>
           <div class="underline"></div>
         </div>
       </div>
@@ -27,6 +27,7 @@
                   <div class="product__item__img">
                     <img :src="brand.logo" :alt="brand.nome" />
                   </div>
+                  <div class="brand-title">{{ brand.nome }}</div> <!-- Título da marca -->
                 </div>
               </router-link>
             </div>
@@ -47,8 +48,6 @@
     </div>
   </section>
 </template>
-
-
 
 <script>
 import axios from 'axios';
@@ -85,8 +84,7 @@ export default {
         itemsPerPage.value = 1;
       } else if (width < 1000) {
         itemsPerPage.value = 2;
-      } 
-      else if (width < 1200) {
+      } else if (width < 1200) {
         itemsPerPage.value = 3;
       } else {
         itemsPerPage.value = 5;
@@ -109,8 +107,6 @@ export default {
 };
 </script>
 
-
-
 <style scoped>
 .product-two {
   background-size: cover;
@@ -119,7 +115,6 @@ export default {
   padding: 50px 0;
   margin: 0 auto;
   max-width: 1200px;
-  
 }
 
 .title-container {
@@ -137,26 +132,30 @@ export default {
   position: relative;
   overflow: hidden;
   max-width: 100%;
-  
 }
+
 .product__item {
   text-align: center;
   border-radius: 10px;
-  background-size: cover;
-  background-position: center;
-  height: 100%; 
+  background-color: #F7F7F7;
+  padding: 10px; /* Padding para espaçamento */
+  height: 300px; /* Altura fixa para garantir uniformidade */
   display: flex;
   flex-direction: column; 
-  justify-content: flex-start; 
-  padding: 0; 
-  background-color: #F7F7F7;
-  padding-top: 10px;
+  justify-content: center; /* Centraliza o conteúdo */
 }
+
+.brand-title {
+  margin-top: 10px; /* Espaçamento acima do título */
+  font-weight: bold;
+  font-size: 1rem; /* Tamanho do texto */
+  color: #333; /* Cor do texto */
+}
+
 .brands-wrapper {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  
 }
 
 .brand-item {
@@ -166,9 +165,8 @@ export default {
   text-align: center;
   border-radius: 10px;
   border-color: #2ECC71;
-  width: calc(20% - 20px);
   overflow: hidden;
-  height: 270px; 
+  height: 300px; /* Altura fixa para garantir uniformidade */
 }
 
 .product-arrow {
@@ -181,7 +179,7 @@ export default {
   bottom: 15px;
   right: 15px;
   cursor: pointer;
-  background-color:white;
+  background-color: white;
 }
 
 .title-red {
@@ -194,24 +192,23 @@ export default {
 .custom-carousel-control {
   background-color: #2ECC71;
   border-radius: 50%;
-  width: 50px; /* Aumentado para facilitar o clique */
+  width: 50px;
   height: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: background-color 0.2s ease, transform 0.2s ease; /* Adicionado efeito de transformação */
-  border: none; /* Removendo borda padrão */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra para profundidade */
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  border: none;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .custom-carousel-control:hover {
-  background-color: #C12E29; /* Cor de fundo ao passar o mouse */
-  transform: scale(1.1); /* Aumenta levemente o botão ao passar o mouse */
+  background-color: #C12E29; 
+  transform: scale(1.1);
 }
 
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
- 
   width: 12px;
   height: 12px;
 }
@@ -219,20 +216,20 @@ export default {
 .carousel-controls {
   position: absolute;
   top: 50%;
-  width: calc(100% + 80px); /* Aumente a largura para que os botões estejam fora do contêiner */
-  left: -40px; /* Mova os botões para a esquerda para fora do contêiner */
+  width: calc(100% + 80px); 
+  left: -40px; 
   display: flex;
   justify-content: space-between;
   transform: translateY(-50%);
-  z-index: 10; /* Para garantir que fiquem acima de outros elementos */
+  z-index: 10; 
 }
 
 .carousel-control-prev {
-  left: 0; /* Deixe na posição 0 dentro do controle expandido */
+  left: 0; 
 }
 
 .carousel-control-next {
-  right: 0; /* Deixe na posição 0 dentro do controle expandido */
+  right: 0; 
 }
 
 @media (max-width: 1200px) {
@@ -242,22 +239,22 @@ export default {
   }
 
   .carousel-control-prev {
-    left: 10px; /* Ajuste a posição para 10px de distância da lateral esquerda */
+    left: 10px; 
   }
 
   .carousel-control-next {
-    right: 10px; /* Ajuste a posição para 10px de distância da lateral direita */
+    right: 10px; 
   }
 }
 
 @media (max-width: 768px) {
   .carousel-control-prev,
   .carousel-control-next {
-    width: 30px; /* Tamanho menor em telas pequenas */
+    width: 30px; 
     height: 30px;
   }
   .carousel-control-prev {
-    left: 15px; /* Mais afastado nas telas menores */
+    left: 15px; 
   }
 
   .carousel-control-next {
@@ -268,17 +265,15 @@ export default {
 @media (max-width: 576px) {
   .carousel-control-prev,
   .carousel-control-next {
-    width: 25px; /* Tamanho ainda menor para telas muito pequenas */
+    width: 25px; 
     height: 25px;
   }
   .carousel-control-prev {
-    left: 20px; /* Ainda mais afastado em telas muito pequenas */
+    left: 20px; 
   }
 
   .carousel-control-next {
     right: 20px;
   }
 }
-
-
 </style>
