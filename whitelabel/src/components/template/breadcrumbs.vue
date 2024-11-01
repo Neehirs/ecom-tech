@@ -102,6 +102,8 @@ export default {
   padding: 0;
   font-size: 12px; /* Diminuir o tamanho da fonte */
   color: #aaa; /* Cor de texto mais clara */
+  max-width: 1400px; /* Largura máxima de 1500px */
+  margin: 0 auto; /* Centraliza o contêiner, mantendo-o à esquerda */
 }
 
 .breadcrumb-item {
