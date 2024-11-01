@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'https://api-wl.agcodecraft.com/api/public',
+  baseURL: 'https://api-genove.agcodecraft.com/api/public',
 });
 
 // Função para buscar categorias

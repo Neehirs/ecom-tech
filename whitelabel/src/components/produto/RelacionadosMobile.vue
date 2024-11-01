@@ -76,7 +76,7 @@
   const fetchRelatedProducts = async () => {
     try {
       if (props.marcaId) {
-        const response = await axios.get(`https://api-wl.agcodecraft.com/api/public/products?marca_id=${props.marcaId}`);
+        const response = await axios.get(`https://api-genove.agcodecraft.com/api/public/products?marca_id=${props.marcaId}`);
         produtos.value = response.data.data;
         maxPaginas.value = Math.ceil(produtos.value.length / itensPorPagina);
         atualizarProdutosVisiveis();

@@ -7354,7 +7354,7 @@ body.megamenu-popup-active .mobile-nav__content {
   width: 100%;
   height: 100%;
   content: "";
-  background-image: linear-gradient(90deg, rgb(33, 34, 38) 22%, rgba(235, 62, 50, 0) 100%);
+  background-image: linear-gradient(90deg, rgb(0, 0, 0) 10%, rgba(235, 62, 50, 0) 100%);
 }
 .cta-seven__sub-title {
   position: relative;
@@ -8688,7 +8688,8 @@ body.megamenu-popup-active .mobile-nav__content {
   position: relative;
   margin: 0 auto;
   max-width: 1300px;
-  
+  margin-bottom: 40px;
+  margin-top: 40px
 }
 .product-one__title {
   font-size: 32px; /* Tamanho da fonte */
@@ -8703,7 +8704,7 @@ body.megamenu-popup-active .mobile-nav__content {
 }
 
 .product-one__title:hover {
-  color: var(--karoons-secondary-color, #0066cc); /* Cor ao passar o mouse */
+  color: var(--karoons-secondary-color, #2ECC71); /* Cor ao passar o mouse */
 }
 
 @media (max-width: 767px) {

@@ -31,9 +31,9 @@ export default {
   name: 'CtaSeven',
   data() {
     return {
-      backgroundImage: require('@/assets/images/resources/cta-7-bg.jpg'), 
+      backgroundImage: require('@/assets/images/banners/banner04.jpg'), 
       subTitle: 'Produtos em alta',
-      title: 'Aproveite 50% de desconto em todos os acessórios automotivos',
+      title: 'Aproveite 50% de desconto',
       listItems: ['Qualidade premium', 'Entrega rápida e segura', 'Suporte ao cliente 24/7'],
       buttonText: 'Compre Agora',
       buttonLink: 'produtos.html',

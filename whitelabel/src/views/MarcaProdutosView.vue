@@ -22,7 +22,7 @@
         <div class="sort-options">
           <div class="custom-select-wrapper">
             <select id="sort" v-model="sortOption">
-              <option value="">Filtrar</option>
+              <option value="">Classificar</option>
               <option value="valor_venda:asc">Preço Menor</option>
               <option value="valor_venda:desc">Preço Maior</option>
               <option value="nome:asc">Nome: A-Z</option>
@@ -104,7 +104,7 @@ const fetchCategories = async () => {
   try {
     if (!brandId.value) return;
 
-    const response = await fetch(`https://api-wl.agcodecraft.com/api/public/categories?brand_id=${brandId.value}`);
+    const response = await fetch(`https://api-genove.agcodecraft.com/api/public/categories?brand_id=${brandId.value}`);
     const data = await response.json();
 
     categories.value = data;
@@ -671,7 +671,7 @@ h2 {
   padding: 4px 10px;
   font-size: 16px;
   border-radius: 10px;
-  border: 1px solid red;
+  border: 1px solid rgb(32, 211, 112);
   background-color: #f0f0f0;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   appearance: none;

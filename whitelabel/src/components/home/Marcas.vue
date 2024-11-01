@@ -27,7 +27,7 @@
                   <div class="product__item__img">
                     <img :src="brand.logo" :alt="brand.nome" />
                   </div>
-                  <div class="brand-title">{{ brand.nome }}</div> <!-- Título da marca -->
+                  <div class="product__item__name">{{ brand.nome }}</div>
                 </div>
               </router-link>
             </div>
@@ -37,11 +37,11 @@
         <div class="carousel-controls">
           <button class="carousel-control-prev custom-carousel-control" type="button" data-bs-target="#brandCarousel" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
+            <span class="visually-hidden">Anterior</span>
           </button>
           <button class="carousel-control-next custom-carousel-control" type="button" data-bs-target="#brandCarousel" data-bs-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
+            <span class="visually-hidden">Próximo</span>
           </button>
         </div>
       </div>
@@ -58,7 +58,7 @@ export default {
   setup() {
     const brands = ref([]);
     const chunkedBrands = ref([]);
-    const itemsPerPage = ref(5); 
+    const itemsPerPage = ref(5);
 
     const chunkArray = (array, chunkSize) => {
       const result = [];
@@ -70,8 +70,8 @@ export default {
 
     const fetchBrands = async () => {
       try {
-        const response = await axios.get('https://api-wl.agcodecraft.com/api/public/brands');
-        brands.value = response.data;
+        const response = await axios.get('https://api-genove.agcodecraft.com/api/public/brands');
+        brands.value = response.data.filter(brand => brand.logo);
         chunkedBrands.value = chunkArray(brands.value, itemsPerPage.value);
       } catch (error) {
         console.error('Erro ao buscar marcas:', error);
@@ -109,12 +109,9 @@ export default {
 
 <style scoped>
 .product-two {
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
   padding: 50px 0;
-  margin: 0 auto;
   max-width: 1200px;
+  margin: 0 auto;
 }
 
 .title-container {
@@ -122,71 +119,53 @@ export default {
   align-items: center;
   justify-content: center;
   margin-top: 30px;
-  border-radius: 10px;
 }
 
-.brands-container {
-  display: flex;
-  align-items: center;
+.brands-wrapper {
+  display: flex; /* Mantém os itens em linha */
   justify-content: center;
-  position: relative;
-  overflow: hidden;
-  max-width: 100%;
+  flex-wrap: nowrap; /* Não permite que os itens quebrem para uma nova linha */
 }
 
 .product__item {
   text-align: center;
   border-radius: 10px;
-  background-color: #F7F7F7;
-  padding: 10px; /* Padding para espaçamento */
-  height: 300px; /* Altura fixa para garantir uniformidade */
+  background-color: #fff; /* Cor de fundo para cada item */
+  padding: 20px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  width: 100%; /* Permite que o item ocupe a largura do contêiner */
+  max-width: 150px; /* Define um limite de largura para os itens */
+  height: 180px; /* Aumenta a altura do item para acomodar o texto */
   display: flex;
-  flex-direction: column; 
-  justify-content: center; /* Centraliza o conteúdo */
+  flex-direction: column; /* Alinha o conteúdo em coluna */
+  justify-content: space-between; /* Espaça o conteúdo verticalmente */
 }
 
-.brand-title {
-  margin-top: 10px; /* Espaçamento acima do título */
-  font-weight: bold;
-  font-size: 1rem; /* Tamanho do texto */
-  color: #333; /* Cor do texto */
+.product__item:hover {
+  transform: translateY(-5px); /* Efeito de elevação ao passar o mouse */
 }
 
-.brands-wrapper {
+.product__item__img {
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;
+  align-items: center;
+  flex: 1;
+  max-height: 100px; /* Limita a altura da imagem */
+}
+
+.product__item__name {
+  font-size: 1rem; /* Tamanho da fonte para o nome da marca */
+  font-weight: 600;
+  color: #333;
+  margin-top: 10px; /* Espaço acima do nome */
+  margin-bottom: 0; /* Remove margem inferior para evitar corte */
 }
 
 .brand-item {
   flex: 0 0 auto;
-  min-width: 200px;
-  margin: 0 10px; 
-  text-align: center;
-  border-radius: 10px;
-  border-color: #2ECC71;
-  overflow: hidden;
-  height: 300px; /* Altura fixa para garantir uniformidade */
-}
-
-.product-arrow {
-  color: #2ECC71;
-  border: none;
-  border-radius: 50%;
-  width: 30px;
-  height: 30px;
-  position: absolute;
-  bottom: 15px;
-  right: 15px;
-  cursor: pointer;
-  background-color: white;
-}
-
-.title-red {
-  color: #2ECC71;
-  text-align: left;
-  margin-bottom: 0px;
-  font-size: 2.3rem;
+  margin: 10px; /* Espaçamento entre itens */
+  transition: transform 0.3s;
 }
 
 .custom-carousel-control {
@@ -197,83 +176,30 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: background-color 0.2s ease, transform 0.2s ease;
+  transition: background-color 0.2s, transform 0.2s;
   border: none;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .custom-carousel-control:hover {
-  background-color: #C12E29; 
+  background-color: #14bb7b;
   transform: scale(1.1);
-}
-
-.carousel-control-prev-icon,
-.carousel-control-next-icon {
-  width: 12px;
-  height: 12px;
 }
 
 .carousel-controls {
   position: absolute;
   top: 50%;
-  width: calc(100% + 80px); 
-  left: -40px; 
+  width: calc(100% + 80px);
+  left: -40px;
   display: flex;
   justify-content: space-between;
   transform: translateY(-50%);
-  z-index: 10; 
-}
-
-.carousel-control-prev {
-  left: 0; 
-}
-
-.carousel-control-next {
-  right: 0; 
+  z-index: 10;
 }
 
 @media (max-width: 1200px) {
   .carousel-controls {
     width: 100%;
     left: 0;
-  }
-
-  .carousel-control-prev {
-    left: 10px; 
-  }
-
-  .carousel-control-next {
-    right: 10px; 
-  }
-}
-
-@media (max-width: 768px) {
-  .carousel-control-prev,
-  .carousel-control-next {
-    width: 30px; 
-    height: 30px;
-  }
-  .carousel-control-prev {
-    left: 15px; 
-  }
-
-  .carousel-control-next {
-    right: 15px;
-  }
-}
-
-@media (max-width: 576px) {
-  .carousel-control-prev,
-  .carousel-control-next {
-    width: 25px; 
-    height: 25px;
-  }
-  .carousel-control-prev {
-    left: 20px; 
-  }
-
-  .carousel-control-next {
-    right: 20px;
   }
 }
 </style>

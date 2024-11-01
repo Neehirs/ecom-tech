@@ -16,7 +16,7 @@
                                     <a href="#" class="category-link">{{ category.name }}</a>
                                     <ul v-if="selectedCategory && selectedCategory.id === category.id">
                                         <li v-for="department in category.departments" :key="department.id">
-                                            <a @click.stop.prevent="navigateToDepartment(department.slug)" class="department-link">
+                                            <a @click.stop.prevent="navigateToDepartment(department.slug, category.slug)" class="department-link">
                                                 {{ department.name }}
                                             </a>
                                         </li>
@@ -54,7 +54,7 @@
                                         <a href="#" class="category-link">{{ category.name }}</a>
                                         <ul v-if="selectedCategory && selectedCategory.id === category.id">
                                             <li v-for="department in category.departments" :key="department.id">
-                                                <a @click.stop.prevent="navigateToDepartment(department.slug)" class="department-link">
+                                                <a @click.stop.prevent="navigateToDepartment(department.slug, category.slug)" class="department-link">
                                                     {{ department.name }}
                                                 </a>
                                             </li>
@@ -85,7 +85,6 @@ export default {
             selectedCategory: null,
             isMobileMenuOpen: false,
             isDepartmentsOpen: false,
-            categorySlug: 'pneus',
         };
     },
     created() {
@@ -98,7 +97,7 @@ export default {
     methods: {
         async fetchCategories() {
             try {
-                const response = await axios.get('https://api-wl.agcodecraft.com/api/public/categories');
+                const response = await axios.get('https://api-genove.agcodecraft.com/api/public/categories');
                 this.categories = response.data;
             } catch (error) {
                 console.error('Error fetching categories:', error);
@@ -106,11 +105,12 @@ export default {
         },
         selectCategory(category) {
             this.selectedCategory = this.selectedCategory && this.selectedCategory.id === category.id ? null : category;
+            if (this.selectedCategory) {
+                this.navigateToCategory(this.selectedCategory.slug); // Navega para a categoria selecionada
+            }
         },
         toggleMobileMenu() {
-            // Alterna o estado do menu mobile
             this.isMobileMenuOpen = !this.isMobileMenuOpen;
-            // Reseta o estado dos departamentos
             if (this.isMobileMenuOpen) {
                 this.isDepartmentsOpen = false; // Fecha os departamentos ao abrir o menu
             }
@@ -118,9 +118,12 @@ export default {
         toggleMobileDepartments() {
             this.isDepartmentsOpen = !this.isDepartmentsOpen; // Alterna o estado dos departamentos
         },
-        navigateToDepartment(departmentSlug) {
+        navigateToDepartment(departmentSlug, categorySlug) {
             this.isMobileMenuOpen = false; // Fecha o menu mobile ao navegar
-            this.$router.push({ name: 'produtos', params: { categoriaSlug: this.categorySlug, departamentoSlug: departmentSlug } });
+            this.$router.push({ name: 'produtos', params: { categoriaSlug: categorySlug, departamentoSlug: departmentSlug } });
+        },
+        navigateToCategory(categorySlug) {
+            this.$router.push({ name: 'produtos', params: { categoriaSlug: categorySlug } });
         },
         handleClickOutside(event) {
             const menu = this.$refs.mobileMenu;

@@ -8,7 +8,7 @@
           <li v-for="(department, deptIndex) in currentCategory.departments" :key="deptIndex">
             <a href="#" class="department-link" @click.prevent="selectDepartment(department, currentCategory)"
               :class="{ 'selected-department': selectedDepartmentId === department.id }">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="#7D7A7A"
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="#ffffff"
                 style="width: 16px; height: 16px; margin-left: 5px;">
                 <path stroke-linecap="round" stroke-linejoin="round"
                   d="M5.25 4.5l7.5 7.5-7.5 7.5m6-15l7.5 7.5-7.5 7.5" />
@@ -41,7 +41,7 @@
           <div class="custom-select-wrapper">
             <div class="custom-select">
               <select id="sort" v-model="sortOption">
-                <option value="">Filtrar</option>
+                <option value="">Classificar</option>
                 <option value="valor_venda:asc">Preço Menor</option>
                 <option value="valor_venda:desc">Preço Maior</option>
                 <option value="nome:asc">Nome: A-Z</option>
@@ -200,7 +200,7 @@ const selectDepartment = async (department, category) => {
 const fetchBrandsByDepartment = async (departmentSlug) => {
   try {
     isLoading.value = true;
-    const response = await fetch(`https://api-wl.agcodecraft.com/api/public/departments/${departmentSlug}`);
+    const response = await fetch(`https://api-genove.agcodecraft.com/api/public/departments/${departmentSlug}`);
     const data = await response.json();
 
     if (data.brands && data.brands.length) {
@@ -360,7 +360,7 @@ const fetchProductsList = async (page = 1) => {
 const fetchBrandsByCategory = async (categorySlug) => {
   try {
     isLoading.value = true;
-    const response = await fetch(`https://api-wl.agcodecraft.com/api/public/categories/${categorySlug}`);
+    const response = await fetch(`https://api-genove.agcodecraft.com/api/public/categories/${categorySlug}`);
     const data = await response.json();
 
 
@@ -495,11 +495,11 @@ body {
 
 .custom-select .icon {
   position: absolute;
-  right: 25px;
-  /* Aproximar do texto */
+  right: 5px;
+ 
   pointer-events: none;
   width: 16px;
-  /* Reduzir o tamanho do ícone */
+ 
   height: 16px;
 }
 
@@ -517,7 +517,7 @@ body {
   font-weight: 600;
   font-size: large;
   letter-spacing: 1px;
-  /* Ajuste o valor conforme necessário */
+  
 }
 
 
@@ -547,7 +547,7 @@ input[type="checkbox"] {
   margin-right: 4px;
   position: relative;
   background-color: #FFFFFF;
-  box-shadow: 0 0 0 0.5px red;
+  box-shadow: 0 0 0 0.5px rgb(32, 211, 112);
   /* Simula a borda mais fina */
   border: none;
   /* Remove a borda original */
@@ -589,33 +589,27 @@ input[type="checkbox"]:checked+.check:after {
 
 .category-name,
 .marcas-name {
-  color: rgb(110, 110, 110);
   text-align: left;
   margin-left: 10px;
-  letter-spacing: 1px;
-  font-weight: 500;
-
+  font-weight: 600;
 }
 
 .category-sidebar {
   width: 280px;
   padding-top: 20px;
-  background: #e9e8e8;
+  background: #e6e6e6; /* Cor de identidade */
   border-radius: 12px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1), 0 0 0 0.5px red;
-  /* Simula a borda mais fina */
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
   position: relative;
-  border: none;
-  /* Remove a borda original */
 }
 
 
-.category-list {
+.department-list {
   list-style: none;
   padding: 0;
   margin: 0;
-  flex: 1;
 }
+
 
 .category-item {
   position: relative;
@@ -656,28 +650,21 @@ input[type="checkbox"]:checked+.check:after {
 
 .department-link {
   display: block;
-  padding: 10px 16px;
-  color: #7D7A7A;
-  /* A cor do texto dos links dos departamentos */
+  padding: 12px 16px;
+  color: #2b4430;
   text-decoration: none;
   transition: background 0.3s ease;
-  font-family: 'Oswald', sans-serif;
-  /* Aplique a fonte Oswald */
 }
 
+
 .department-link:hover {
-  background: #919191;
-  /* Cor de fundo ao passar o mouse */
+  background: rgba(204, 204, 204, 0.6); 
 }
 
 .selected-department {
   font-weight: bold;
-  color: #ffffff;
-  /* Texto em branco quando selecionado */
-  background-color: #606060;
-  /* Fundo quando selecionado */
+  background-color: rgba(204, 204, 204, 0.8); /* Fundo claro quando selecionado */
   border-radius: 4px;
-  transition: background-color 0.3s, color 0.3s;
 }
 
 
@@ -696,14 +683,12 @@ input[type="checkbox"]:checked+.check:after {
   font-size: 16px;
   border-radius: 10px;
   background-color: #f0f0f0;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 0 0 0.5px red;
-  /* Simula a borda mais fina */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 0 0 0.5px rgb(32, 211, 112);
   appearance: none;
   cursor: pointer;
   transition: border-color 0.3s, box-shadow 0.3s;
   color: #827F7F;
   border: none;
-  /* Remove a borda original */
 }
 
 .sort-options select:hover,

@@ -42,7 +42,7 @@ export default {
 
     const fetchFaqs = async () => {
       try {
-        const response = await axios.get('https://api-wl.agcodecraft.com/api/public/faq');
+        const response = await axios.get('https://api-genove.agcodecraft.com/api/public/faq');
         faqs.value = response.data.filter(item => item.ativo); // Filtra para incluir apenas os itens ativos
       } catch (error) {
         console.error("Erro ao buscar FAQs:", error);

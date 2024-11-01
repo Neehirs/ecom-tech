@@ -1,12 +1,11 @@
 <template>
     <div class="page-wrapper">
+
       <Banner1 />
-      <Marcas />
-      <Banner2 />
-      
       <Destaques />
+      <Banner2 />
+      <Marcas />
       <BannerDuplo />
-      
     </div>
   </template>
   

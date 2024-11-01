@@ -2,21 +2,16 @@
   <section class="cta-five">
     <div class="container">
       <div class="row gutter-y-30">
-        <div
-          class="col-lg-4 wow fadeInUp"
-          v-for="(item, index) in items"
-          :key="index"
-          :data-wow-delay="index * 100 + 'ms'"
-        >
-          <div class="cta-five__item" :class="item.className">
-            <div class="cta-five__item__image">
-              <img :src="item.image" alt="Image" />
-            </div>
-            <div class="cta-five__item__content">
-              <h4 class="sub-title">{{ item.subTitle }}</h4>
-              <h3 class="title">{{ item.title }}</h3>
-              <p class="text">{{ item.text }}</p>
-              <a :href="item.link" class="cta-five__item__button">Comprar</a>
+        <div class="col-lg-4 fade-in" v-for="(item, index) in items" :key="index"
+          :style="{ animationDelay: index * 100 + 'ms' }">
+          <div class="cta-five__item" :class="item.className" :style="{ backgroundImage: `url(${item.image})` }">
+            <div class="cta-five__overlay">
+              <div class="cta-five__item__content">
+                <h4 class="sub-title">{{ item.subTitle }}</h4>
+                <h3 class="title">{{ item.title }}</h3>
+                <p class="text">{{ item.text }}</p>
+                <!-- <a :href="item.link" class="cta-five__item__button">Comprar</a> -->
+              </div>
             </div>
           </div>
         </div>
@@ -32,28 +27,28 @@ export default {
     return {
       items: [
         {
-         /*  subTitle: "Novas Coleções",
-          title: "Acessórios BMW",
-          text: "Até 40% de desconto em acessórios",
-          link: "products.html", */
-          image: require('@/assets/images/resources/cta-5-1.png'),
-          className: "cta-five__item--one",
+          subTitle: "Ofertas Imperdíveis",
+          title: "iPhone 16 ",
+         /*  text: "Desfrute da tecnologia avançada do novo iPhone 16 Pro Max com até 40% de desconto. Não perca!", */
+          link: "products.html",
+          image: require('@/assets/images/banners/banner01.jpg'),
+          className: "cta-five__item--light",
         },
         {
-         /*  subTitle: "Novas Coleções",
-          title: "Acessórios para Carros Esportivos",
-          text: "Até 40% de desconto em acessórios",
-          link: "products.html", */
-          image: require('@/assets/images/resources/cta-5-2.png'),
-          className: "cta-five__item--two",
+          subTitle: "Tendências 2024",
+          /* title: "PS5 Pro", */
+          /* text: "Experimente jogos de última geração no PS5 Pro com até 40% de desconto. Aproveite esta oferta!", */
+          link: "products.html",
+          image: require('@/assets/images/banners/banner02.webp'),
+          className: "cta-five__item--medium",
         },
         {
-          /* subTitle: "Novas Coleções",
-          title: "Acessórios de Luxo",
-          text: "Até 50% de desconto em acessórios",
-          link: "products.html", */
-          image: require('@/assets/images/resources/cta-5-2.png'), // Mantendo a mesma imagem
-          className: "cta-five__item--three",
+          subTitle: "Lançamentos Exclusivos",
+          /* title: "Bicicleta de Carbono", */
+          /* text: "Leve e resistente! A nova Bicicleta de Carbono está com até 50% de desconto. Ideal para quem busca desempenho.", */
+          link: "products.html",
+          image: require('@/assets/images/banners/banner03.jpg'),
+          className: "cta-five__item--dark",
         },
       ],
     };
@@ -62,62 +57,83 @@ export default {
 </script>
 
 <style scoped>
+.cta-five {
+  padding: 40px 0;
+}
+
 .cta-five__item {
-  border: 1px solid #e1e1e1; /* Borda sutil */
-  border-radius: 8px; /* Bordas arredondadas */
-  overflow: hidden; /* Para manter a imagem dentro do contêiner */
-  transition: transform 0.3s; /* Transição suave */
-  text-align: center; /* Centralizar o texto */
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  text-align: center;
+  color: #fff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cta-five__overlay {
+  /* background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3)); */
+  border-radius: 12px;
+  padding: 20px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.cta-five__item__content {
+  z-index: 1;
+  padding: 20px;
 }
 
 .cta-five__item:hover {
-  transform: scale(1.05); /* Efeito de zoom ao passar o mouse */
-}
-
-.cta-five__item__image img {
-  width: 100%; /* A imagem ocupa todo o contêiner */
-  height: auto; /* Mantém a proporção da imagem */
+  transform: translateY(-5px);
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.15);
 }
 
 .sub-title {
-  font-size: 16px; /* Tamanho do subtítulo */
-  color: #888; /* Cor do subtítulo */
+  font-size: 14px;
+  color: #f1f1f1;
+  font-weight: 600;
 }
 
 .title {
-  font-size: 24px; /* Tamanho do título */
-  margin: 10px 0; /* Margem em cima e embaixo do título */
+  font-size: 30px; /* Aumenta o tamanho do título */
+  margin: 10px 0;
+  color: #fff;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7); /* Sombra suave para destaque */
 }
 
 .text {
-  font-size: 14px; /* Tamanho do texto */
-  color: #555; /* Cor do texto */
+  font-size: 14px;
+  margin-bottom: 12px;
 }
 
 .cta-five__item__button {
-  display: inline-block; /* Torna o botão em bloco */
-  padding: 10px 20px; /* Padding do botão */
-  background-color: #007bff; /* Cor de fundo do botão */
-  color: #fff; /* Cor do texto do botão */
-  border-radius: 5px; /* Bordas arredondadas do botão */
-  text-decoration: none; /* Remove sublinhado */
-  transition: background-color 0.3s; /* Transição suave */
+  display: inline-block;
+  padding: 10px 24px;
+  background-color: #2ECC71;
+  color: #fff;
+  border-radius: 5px;
+  font-size: 14px;
+  text-decoration: none;
+  transition: background-color 0.3s;
 }
 
 .cta-five__item__button:hover {
-  background-color: #0056b3; /* Cor de fundo ao passar o mouse */
+  background-color: #28a745;
 }
 
-/* Estilos para diferentes tons de cinza */
-.cta-five__item--one {
-  background-color: #f0f0f0; /* Tom claro */
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 1s forwards;
 }
 
-.cta-five__item--two {
-  background-color: #d9d9d9; /* Tom médio */
-}
-
-.cta-five__item--three {
-  background-color: #bfbfbf; /* Tom escuro */
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
 }
 </style>

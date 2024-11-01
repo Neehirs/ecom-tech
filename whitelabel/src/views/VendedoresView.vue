@@ -26,7 +26,7 @@ const vendedores = ref([]);
 
 onMounted(async () => {
   try {
-    const response = await fetch('https://api-wl.agcodecraft.com/api/public/team');
+    const response = await fetch('https://api-genove.agcodecraft.com/api/public/team');
     const data = await response.json();
     
     vendedores.value = data.sort((a, b) => b.nome.localeCompare(a.nome));

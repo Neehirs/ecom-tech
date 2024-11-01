@@ -103,14 +103,11 @@
     </div>
 
     <!-- Produtos Relacionados (Somente para PCs) -->
-    <section v-if="!isMobile" class="related-products-section">
+    <section class="related-products-section">
       <Relacionados :marcaId="marcaId" />
     </section>
 
-    <!-- Produtos Relacionados para Celulares -->
-    <section v-if="isMobile" class="related-products-mobile-section">
-      <RelacionadosMobile :marcaId="marcaId" />
-    </section>
+  
 
     <!-- Modal de Imagem -->
     <div v-if="showModal" class="image-modal" @click="closeModal">
@@ -154,7 +151,7 @@ const isLoading = ref(true);
 
 const fetchProductData = async (slug) => {
   try {
-    const response = await axios.get(`https://api-wl.agcodecraft.com/api/public/products/${slug}/details`);
+    const response = await axios.get(`https:/api-genove.agcodecraft.com/api/public/products/${slug}/details`);
     const data = response.data;
 
     nome.value = data.nome;
@@ -231,7 +228,7 @@ const exchangeRates = ref({});
 
 const fetchExchangeRates = async () => {
   try {
-    const response = await axios.get('https://api-wl.agcodecraft.com/api/public/exchange-rates');
+    const response = await axios.get('https://api-genove.agcodecraft.com/api/public/exchange-rates');
     const rates = response.data;
     exchangeRates.value = {
       BRL: parseFloat(rates.find(rate => rate.target_currency.name === 'Real').tax),

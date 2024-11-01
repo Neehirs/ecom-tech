@@ -60,7 +60,7 @@ export default {
 
         const fetchProducts = async () => {
             try {
-                const response = await axios.get('https://api-wl.agcodecraft.com/api/public/products');
+                const response = await axios.get('https://api-genove.agcodecraft.com/api/public/products');
                 products.value = response.data.data;
                 chunkedProducts.value = chunkArray(products.value, itemsPerPage.value);
             } catch (error) {
@@ -75,11 +75,11 @@ export default {
             } else if (width < 768) {
                 itemsPerPage.value = 2;
             } else if (width < 992) {
-                itemsPerPage.value = 3;
+                itemsPerPage.value = 2;
             } else if (width < 1200) {
-                itemsPerPage.value = 4;
+                itemsPerPage.value = 3;
             } else {
-                itemsPerPage.value = 5;
+                itemsPerPage.value = 4;
             }
             chunkedProducts.value = chunkArray(products.value, itemsPerPage.value);
         };
@@ -130,19 +130,22 @@ body {
 .custom-carousel-control {
   background-color: #2ECC71;
   border-radius: 50%;
-  width: 50px; /* Aumentado para facilitar o clique */
+  width: 50px; 
   height: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: background-color 0.2s ease, transform 0.2s ease; /* Adicionado efeito de transformação */
-  border: none; /* Removendo borda padrão */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra para profundidade */
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  border: none;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  position: absolute;
+  top: 50%; 
+  transform: translateY(-50%); 
 }
 
 .custom-carousel-control:hover {
-  background-color: #C12E29; /* Cor de fundo ao passar o mouse */
-  transform: scale(1.1); /* Aumenta levemente o botão ao passar o mouse */
+  background-color: #C12E29; 
+  transform: scale(1.1); 
 }
 
 
@@ -177,11 +180,11 @@ body {
     }
 
     .carousel-control-prev {
-        left: 10px; /* Mais afastado da lateral esquerda */
+        left: 10px; 
     }
 
     .carousel-control-next {
-        right: 10px; /* Mais afastado da lateral direita */
+        right: 10px;
     }
 }
 
@@ -198,11 +201,11 @@ body {
 
     .carousel-control-prev,
     .carousel-control-next {
-        width: 30px; /* Tamanho menor em telas pequenas */
+        width: 30px; 
         height: 30px;
     }
     .carousel-control-prev {
-        left: 15px; /* Mais afastado em telas menores */
+        left: 15px; 
     }
 
     .carousel-control-next {
