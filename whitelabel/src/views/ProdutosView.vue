@@ -3,12 +3,12 @@
     <LoadingSpinner :isLoading="isLoading" />
     <div v-if="currentCategory && currentCategory.departments.length" class="category-sidebar">
       <div>
-        <h3 class="category-name">Categorias</h3>
+        <h3 class="category-name">{{ currentCategory.name }}</h3>
         <ul class="department-list">
           <li v-for="(department, deptIndex) in currentCategory.departments" :key="deptIndex">
             <a href="#" class="department-link" @click.prevent="selectDepartment(department, currentCategory)"
               :class="{ 'selected-department': selectedDepartmentId === department.id }">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="#ffffff"
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="gray"
                 style="width: 16px; height: 16px; margin-left: 5px;">
                 <path stroke-linecap="round" stroke-linejoin="round"
                   d="M5.25 4.5l7.5 7.5-7.5 7.5m6-15l7.5 7.5-7.5 7.5" />
@@ -70,6 +70,7 @@
       <div class="product-list">
         <router-link v-for="(product, index) in sortedProducts" :key="index"
           :to="`/produto/${product.slug}?page=${currentPage.value}`" class="product__item" style="max-width: 250px;">
+          <div class="product__item__code">COD: {{ product.codigo }}</div>
           <div class="product__item__img">
             <img :src="product.imagens[0]?.url || defaultImage" :alt="`Imagem do produto ${product.nome}`"
               class="img-fluid" />
@@ -78,7 +79,7 @@
             <h4 class="product__item__title">
               <a :href="`/produto/${product.slug}?page=${currentPage.value}`">{{ product.nome }}</a>
             </h4>
-            <div class="product__item__code">COD: {{ product.codigo }}</div>
+            
             <div class="product__item__price" v-if="product.tem_estoque">{{ formatarPreco(product.valor_venda) }}</div>
             <small v-if="!product.tem_estoque" class="out-of-stock-tag">INDISPONÍVEL</small>
           </div>
@@ -591,7 +592,7 @@ input[type="checkbox"]:checked+.check:after {
 .marcas-name {
   text-align: left;
   margin-left: 10px;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .category-sidebar {

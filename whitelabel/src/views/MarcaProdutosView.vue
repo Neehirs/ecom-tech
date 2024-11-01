@@ -38,7 +38,7 @@
         <router-link v-for="(product, index) in filteredProducts" :key="index" :to="`/produto/${product.slug}?page=${currentPage.value}`"
         class="product__item"
         style="max-width: 250px;">
-
+        <div class="product__item__code">COD: {{ product.codigo }}</div>
          <div class="product__item__img">
             <img 
               :src="product.imagens[0]?.url || defaultImage" 
@@ -50,7 +50,7 @@
             <h4 class="product__item__title">
               <a :href="`/produto/${product.slug}?page=${currentPage.value}`">{{ product.nome }}</a>
             </h4>
-            <div class="product__item__code">COD: {{ product.codigo }}</div>
+            
             <div class="product__item__price" v-if="product.tem_estoque">{{ formatarPreco(product.valor_venda) }}</div>
             <small v-if="!product.tem_estoque" class="out-of-stock-tag">INDISPONÍVEL</small>
           </div>

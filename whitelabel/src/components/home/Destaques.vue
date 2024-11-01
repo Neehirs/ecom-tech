@@ -8,6 +8,7 @@
                         <div class="row justify-content-center">
                             <div class="row justify-content-center flex-row-wrap">
                                 <div class="product__item" v-for="item in productChunk" :key="item.id">
+                                    <div class="product__item__code">COD: {{ item.codigo }}</div>
                                     <div class="product__item__img">
                                         <img :src="item.imagens[0].url" :alt="item.nome" class="img-fluid" />
                                     </div>
@@ -17,7 +18,7 @@
                                                 {{ item.nome }}
                                             </router-link>
                                         </h4>
-                                        <div class="product__item__code">COD: {{ item.codigo }}</div>
+                                        
                                         <div class="product__item__price">${{ item.valor_venda }}</div>
                                     </div>
                                 </div>

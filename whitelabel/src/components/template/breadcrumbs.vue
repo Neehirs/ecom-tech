@@ -6,12 +6,14 @@
         :key="index" 
         class="breadcrumb-item"
       >
-        <router-link v-if="index !== breadcrumbs.length - 1" :to="crumb.to" class="breadcrumb-link">
+        <router-link 
+          v-if="index !== breadcrumbs.length - 1" 
+          :to="crumb.to" 
+          class="breadcrumb-link"
+        >
           {{ crumb.breadcrumb }}
         </router-link>
         <span v-else class="breadcrumb-text">{{ crumb.breadcrumb }}</span>
-
-        <span v-if="index < breadcrumbs.length - 1" class="breadcrumb-separator"> &gt; </span>
       </li>
     </ul>
   </nav>
@@ -40,19 +42,15 @@ export default {
     };
 
     watchEffect(() => {
-      // Log para depuração
       console.log('Current path:', route.path);
-      
-      isHomePage.value = route.path === '/';  // Verifica se é a página inicial
+      isHomePage.value = route.path === '/';  
 
       const matchedBreadcrumbs = [];
-
       const categorySlug = route.params.categoriaSlug;
       const departmentSlug = route.params.departamentoSlug;
 
-      if (!categories.value.length) return;  // Verifica se as categorias foram carregadas
+      if (!categories.value.length) return;  
 
-      // Se houver um departamento, adicione "Página Inicial" e a categoria
       if (departmentSlug) {
         const category = categories.value.find(cat => cat.slug === categorySlug);
         if (category) {
@@ -60,15 +58,15 @@ export default {
           if (department) {
             matchedBreadcrumbs.push({
               breadcrumb: 'Página Inicial', 
-              to: '/' // Link para a página inicial
+              to: '/'
             });
             matchedBreadcrumbs.push({
-              breadcrumb: category.name, // Usando o nome da categoria
-              to: `/produtos/${categorySlug}` // Link para a categoria
+              breadcrumb: category.name,
+              to: `/produtos/${categorySlug}`
             });
             matchedBreadcrumbs.push({
               breadcrumb: department.name, 
-              to: `/produtos/${categorySlug}/${departmentSlug}` // Link para o departamento
+              to: `/produtos/${categorySlug}/${departmentSlug}`
             });
           }
         }
@@ -77,16 +75,16 @@ export default {
         if (category) {
           matchedBreadcrumbs.push({
             breadcrumb: 'Página Inicial', 
-            to: '/' // Link para a página inicial
+            to: '/'
           });
           matchedBreadcrumbs.push({
-            breadcrumb: category.name, // Usando o nome da categoria
-            to: `/produtos/${categorySlug}` // Link para a categoria
+            breadcrumb: category.name,
+            to: `/produtos/${categorySlug}`
           });
         }
       }
 
-      breadcrumbs.value = matchedBreadcrumbs; // Atualiza apenas se houver breadcrumbs válidos
+      breadcrumbs.value = matchedBreadcrumbs; 
     });
 
     onMounted(fetchCategories);
@@ -102,8 +100,8 @@ export default {
   display: flex;
   align-items: center;
   padding: 0;
-  font-size: 14px;
-  color: #555;
+  font-size: 12px; /* Diminuir o tamanho da fonte */
+  color: #aaa; /* Cor de texto mais clara */
 }
 
 .breadcrumb-item {
@@ -112,20 +110,17 @@ export default {
 }
 
 .breadcrumb-link {
-  color: #808080;
+  color: #aaa; /* Cor mais suave */
   text-decoration: none;
+  transition: color 0.3s; /* Transição suave na cor */
 }
 
 .breadcrumb-link:hover {
-  text-decoration: underline;
+  color: #555; /* Cor mais escura ao passar o mouse */
+  text-decoration: underline; /* Mantenha o sublinhado ao passar o mouse */
 }
 
 .breadcrumb-text {
-  color: #555;
-}
-
-.breadcrumb-separator {
-  margin: 0 8px; 
-  color: #555; 
+  color: #aaa; /* Manter a mesma cor do link */
 }
 </style>
