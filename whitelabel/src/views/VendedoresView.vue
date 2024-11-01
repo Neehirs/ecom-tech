@@ -2,17 +2,22 @@
   <div class="vendedores">
     <div class="block-title">
       <h1>Nossos Vendedores</h1>
+      <p>Conheça nossa equipe dedicada, pronta para te ajudar!</p>
     </div>
 
     <div class="vendedor-list">
       <div v-for="vendedor in vendedores" :key="vendedor.id" class="vendedor">
-        <img :src="vendedor.foto ? vendedor.foto : semFoto" :alt="vendedor.nome" />
-        <h2>{{ vendedor.nome }}</h2>
-        <p>{{ vendedor.funcao }}</p>
-        <a :href="`https://wa.me/${vendedor.whatsapp}`" target="_blank" class="whatsapp-link">
-          <i class="fab fa-whatsapp whats-icon"></i>
-          <span>Fale no WhatsApp</span>
-        </a>
+        <div class="image-container">
+          <img :src="vendedor.foto ? vendedor.foto : semFoto" :alt="vendedor.nome" />
+        </div>
+        <div class="vendedor-info">
+          <h2>{{ vendedor.nome }}</h2>
+          <p>{{ vendedor.funcao }}</p>
+          <a :href="`https://wa.me/${vendedor.whatsapp}`" target="_blank" class="whatsapp-link">
+            <i class="fab fa-whatsapp whats-icon"></i>
+            <span>WhatsApp</span>
+          </a>
+        </div>
       </div>
     </div>
   </div>
@@ -36,72 +41,90 @@ onMounted(async () => {
 });
 </script>
 
-
 <style scoped>
 .vendedores {
-  padding: 40px 20px;
+  padding: 50px 20px;
   text-align: center;
-  max-width: 800px;
+  max-width: 1200px;
   margin: 0 auto;
-  border-radius: 20px;
-  background-color: #f9f9f9;
+  border-radius: 15px;
+  background-color: #f2f2f2;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+.block-title {
+  margin-bottom: 30px;
 }
 
 .block-title h1 {
-  font-size: 3em;
-  margin-bottom: 30px;
+  font-size: 2.5em;
   color: #333;
-  font-weight: 700;
-  letter-spacing: -0.8px;
+  font-weight: bold;
+}
+
+.block-title p {
+  font-size: 1.1em;
+  color: #666;
+  margin-top: 10px;
+  line-height: 1.5;
 }
 
 .vendedor-list {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   flex-wrap: wrap;
-  gap: 40px;
+  gap: 30px;
 }
 
 .vendedor {
   background-color: #fff;
-  border-radius: 20px;
-  padding: 25px;
-  width: 300px;
-  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
-  
-  text-align: center;
-  transition: transform 0.4s, box-shadow 0.4s;
+  border-radius: 15px;
+  padding: 20px;
+  width: 280px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+  position: relative;
 }
 
 .vendedor:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  transform: translateY(-5px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2);
 }
 
-.vendedor img {
-  border-radius: 50%;
-  width: 140px;
-  height: 140px;
+.image-container {
+  width: 120px;
+  height: 120px;
+  overflow: hidden;
+  border-radius: 20%;
+  margin: 0 auto 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.image-container img {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  margin: 0 auto 20px;
-  border: 4px solid #e0e0e0;
   transition: transform 0.3s;
 }
 
-.vendedor:hover img {
-  transform: scale(1.05);
+.image-container:hover img {
+  transform: scale(1.1);
+}
+
+.vendedor-info {
+  text-align: center;
 }
 
 .vendedor h2 {
-  font-size: 1.5em;
-  margin-bottom: 8px;
+  font-size: 1.4em;
+  margin-bottom: 5px;
   color: #222;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .vendedor p {
-  font-size: 1.1em;
-  margin-bottom: 25px;
+  font-size: 1em;
+  margin-bottom: 20px;
   color: #555;
 }
 
@@ -109,27 +132,29 @@ onMounted(async () => {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 10px 20px;
-  background: linear-gradient(135deg, #25d366, #1eb354);
-  border-radius: 50px;
+  padding: 12px 20px;
+  background-color: #25d366;
+  border-radius: 30px;
   text-decoration: none;
   color: #fff;
-  font-weight: bold;
-  font-size: 1.1em;
+  font-weight: 600;
+  font-size: 1em;
   transition: background 0.3s, box-shadow 0.3s;
+  border: none;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .whatsapp-link:hover {
-  background: linear-gradient(135deg, #1eb354, #25d366);
-  box-shadow: 0 8px 20px rgba(37, 211, 102, 0.5);
+  background-color: #1eb354;
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5);
 }
 
 .whatsapp-link span {
-  margin-left: 10px;
+  margin-left: 8px;
 }
 
 .whats-icon {
-  font-size: 30px;
+  font-size: 20px;
 }
 
 @media (max-width: 768px) {
@@ -139,8 +164,12 @@ onMounted(async () => {
   }
 
   .vendedor {
-    width: 100%;
+    width: 90%;
     max-width: 400px;
+  }
+
+  .block-title h1 {
+    font-size: 2em;
   }
 }
 </style>

@@ -9,16 +9,8 @@
         </div>
         <div class="topbar-four__search">
           <form @submit.prevent="searchProducts" class="d-flex">
-            <input
-              v-model="searchText"
-              @input="debouncedHandleInput"
-              @focus="showSuggestions = true"
-              @blur="handleBlur"
-              type="search"
-              class="search-input"
-              placeholder="O que você está procurando hoje?"
-              autocomplete="off"
-            />
+            <input v-model="searchText" @input="debouncedHandleInput" @focus="showSuggestions = true" @blur="handleBlur"
+              type="search" class="search-input" placeholder="O que você está procurando hoje?" autocomplete="off" />
             <button type="submit" class="search-button">
               <i class="flaticon-search"></i>
             </button>
@@ -34,12 +26,15 @@
         <ul class="list-unstyled topbar-four__info">
           <li class="topbar-four__info__item">
             <span v-if="currencies.length">
-              R$ {{ currencies[0].tax }}  
+              R$ {{ currencies[0].tax }}
             </span>
             <span v-else>Carregando...</span>
           </li>
           <li class="topbar-four__info__item">
-           <strong>Equipe de vendas</strong> 
+            <router-link :to="{ name: 'vendedores' }" class="sales-team-link">
+              <i class="fab fa-whatsapp"></i>
+              <strong>Equipe de vendas</strong>
+            </router-link>
           </li>
         </ul>
       </div>
@@ -74,7 +69,7 @@ const debounce = (func, delay) => {
 const searchProducts = async () => {
   if (searchText.value.trim()) {
     try {
-      showSuggestions.value = false; 
+      showSuggestions.value = false;
       await router.push({ name: 'produtos', query: { text: searchText.value } });
     } catch (err) {
       console.error('Erro ao navegar para produtos:', err);
@@ -110,7 +105,7 @@ const fetchProducts = async () => {
 
 const debouncedHandleInput = debounce(() => {
   if (searchText.value.trim()) {
-    showSuggestions.value = true; 
+    showSuggestions.value = true;
   }
   fetchProducts();
 }, 300);
@@ -158,9 +153,12 @@ fetchExchangeRates();
 
 <style>
 .topbar-four {
-  background-color: #f8f9fa; /* Cor de fundo clara */
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra para dar profundidade */
-  padding: 15px 0; /* Espaçamento vertical */
+  background-color: #f8f9fa;
+  /* Cor de fundo clara */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  /* Sombra para dar profundidade */
+  padding: 15px 0;
+  /* Espaçamento vertical */
 }
 
 .topbar-four__inner {
@@ -171,37 +169,46 @@ fetchExchangeRates();
 
 .search-input {
   border: 1px solid #ccc;
-  border-radius: 25px; /* Bordas arredondadas */
+  border-radius: 25px;
+  /* Bordas arredondadas */
   padding: 10px 20px;
   font-size: 16px;
   transition: border-color 0.3s;
 }
 
 .search-input:focus {
-  border-color: #007bff; /* Cor da borda ao focar */
-  outline: none; /* Remove o contorno padrão */
+  border-color: #007bff;
+  /* Cor da borda ao focar */
+  outline: none;
+  /* Remove o contorno padrão */
 }
 
 .search-button {
-  background-color: #007bff; /* Cor de fundo do botão */
+  background-color: #007bff;
+  /* Cor de fundo do botão */
   color: white;
   border: none;
-  border-radius: 25px; /* Bordas arredondadas */
+  border-radius: 25px;
+  /* Bordas arredondadas */
   padding: 10px 15px;
-  margin-left: 10px; /* Espaço entre o campo de pesquisa e o botão */
-  cursor: pointer; /* Cursor de ponteiro para indicar que é clicável */
+  margin-left: 10px;
+  /* Espaço entre o campo de pesquisa e o botão */
+  cursor: pointer;
+  /* Cursor de ponteiro para indicar que é clicável */
   transition: background-color 0.3s;
 }
 
 .search-button:hover {
-  background-color: #0056b3; /* Cor de fundo ao passar o mouse */
+  background-color: #0056b3;
+  /* Cor de fundo ao passar o mouse */
 }
 
 .topbar-four__info__item {
   font-size: 18px;
   margin-left: 20px;
   display: flex;
-  align-items: center; /* Centraliza verticalmente */
+  align-items: center;
+  /* Centraliza verticalmente */
 }
 
 .topbar-four__info__item strong {
@@ -275,13 +282,17 @@ fetchExchangeRates();
 
 @media (max-width: 768px) {
   .topbar-four__inner {
-    flex-direction: column; /* Layout em coluna em telas pequenas */
-    align-items: flex-start; /* Alinhamento à esquerda */
+    flex-direction: column;
+    /* Layout em coluna em telas pequenas */
+    align-items: flex-start;
+    /* Alinhamento à esquerda */
   }
 
   .topbar-four__info__item {
-    margin-left: 0; /* Remove margem em telas pequenas */
-    margin-top: 10px; /* Espaço entre os itens */
+    margin-left: 0;
+    /* Remove margem em telas pequenas */
+    margin-top: 10px;
+    /* Espaço entre os itens */
   }
 }
 </style>

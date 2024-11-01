@@ -663,7 +663,7 @@ input[type="checkbox"]:checked+.check:after {
 
 .selected-department {
   font-weight: bold;
-  background-color: rgba(204, 204, 204, 0.8); /* Fundo claro quando selecionado */
+  background-color: rgba(204, 204, 204, 0.8);
   border-radius: 4px;
 }
 
@@ -766,5 +766,49 @@ input[type="checkbox"]:checked+.check:after {
     width: 22%;
     max-width: 260px;
   }
+}
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.pagination-button {
+  background-color: #2ECC71;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.pagination-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.pagination-numbers {
+  display: flex;
+  align-items: center;
+  margin: 0 10px;
+}
+
+.pagination-numbers button {
+  background-color: #f0f0f0;
+  border: 1px solid #ddd;
+  padding: 8px;
+  margin: 0 5px;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.pagination-numbers button:hover {
+  background-color: #e0e0e0;
+}
+.active {
+  background-color: #2ECC71; 
+  color: #2ECC71;
 }
 </style>
