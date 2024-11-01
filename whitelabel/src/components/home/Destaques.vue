@@ -27,14 +27,16 @@
                     </div>
                 </div>
 
-                <button class="carousel-control-prev custom-carousel-control" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next custom-carousel-control" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
+                 <div class="carousel-controls">
+          <button class="carousel-control-prev custom-carousel-control" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Anterior</span>
+          </button>
+          <button class="carousel-control-next custom-carousel-control" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Próximo</span>
+          </button>
+        </div>
             </div>
         </div>
     </section>
@@ -128,36 +130,30 @@ body {
     margin: 0 auto;
 }
 
+.carousel-controls {
+  position: absolute;
+  top: 50%;
+  width: calc(100% + 80px);
+  left: -40px;
+  display: flex;
+  justify-content: space-between;
+  transform: translateY(-50%);
+  z-index: 10;
+}
+
+
 .custom-carousel-control {
   background-color: #2ECC71;
   border-radius: 50%;
-  width: 50px; 
+  width: 50px;
   height: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: background-color 0.2s ease, transform 0.2s ease;
+  transition: background-color 0.2s, transform 0.2s;
   border: none;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  position: absolute;
-  top: 50%; 
-  transform: translateY(-50%); 
+  margin: 0 50px
 }
-
-.custom-carousel-control:hover {
-  background-color: #C12E29; 
-  transform: scale(1.1); 
-}
-
-
-.carousel-control-prev-icon,
-.carousel-control-next-icon {
-    
-    width: 12px;
-    height: 12px;
-}
-
-
 
 .row.flex-row-wrap {
     display: flex;
@@ -180,13 +176,7 @@ body {
         width: calc(25% - 20px); 
     }
 
-    .carousel-control-prev {
-        left: 10px; 
-    }
-
-    .carousel-control-next {
-        right: 10px;
-    }
+   
 }
 
 @media (max-width: 992px) {
@@ -200,18 +190,7 @@ body {
         width: calc(50% - 20px); 
     }
 
-    .carousel-control-prev,
-    .carousel-control-next {
-        width: 30px; 
-        height: 30px;
-    }
-    .carousel-control-prev {
-        left: 15px; 
-    }
-
-    .carousel-control-next {
-        right: 15px;
-    }
+  
 }
 
 @media (max-width: 576px) {
@@ -219,17 +198,6 @@ body {
         width: calc(100% - 20px); 
     }
 
-    .carousel-control-prev,
-    .carousel-control-next {
-        width: 25px; /* Tamanho ainda menor para telas muito pequenas */
-        height: 25px;
-    }
-    .carousel-control-prev {
-        left: 20px; /* Ainda mais afastado em telas muito pequenas */
-    }
-
-    .carousel-control-next {
-        right: 20px;
-    }
+    
 }
 </style>
