@@ -53,7 +53,7 @@
           topTitle: 'Desperte o potencial da sua marca!',
           subTitle: 'Crie uma experiência de compra única para seus clientes',
           text: 'Conecte-se de forma significativa e personalizada.',
-          price: 290,
+          price: 600,
           image: require('@/assets/images/ecommerce.png')
         },
         {
@@ -61,7 +61,7 @@
           topTitle: 'Transforme sua visão em realidade!',
           subTitle: 'Aproveite as oportunidades do mundo digital.',
           text: 'Lance seu e-commerce com facilidade e estilo.',
-          price: 290,
+          price: 800,
           image: require('@/assets/images/ecommerce.avif')
         },
         {
@@ -69,7 +69,7 @@
           topTitle: 'Sua marca, seu sucesso!',
           subTitle: 'Inicie sua jornada e conquiste o mercado online!',
           text: 'Construa um e-commerce sob medida para você.',
-          price: 290,
+          price: 1100,
           image: require('@/assets/images/ecommerce.png')
         }
       ];

@@ -22,7 +22,7 @@
   --karoons-text-dark-rgb: 110, 107, 112;
   --karoons-text-gray: #89868d;
   --karoons-text-gray-rgb: 137, 134, 141;
-  --karoons-base: #2ECC71;
+  --karoons-base: #0e3610;
   --karoons-base-rgb: 226, 59, 51;
   --karoons-gray: #F4F4F4;
   --karoons-gray-rgb: 244, 244, 244;
@@ -14389,9 +14389,10 @@ body.megamenu-popup-active .mobile-nav__content {
   opacity: 0;
   transition: transform 1100ms ease, opacity 1100ms ease;
   transform: translateX(-200px);
+  color: #0E3610
 }
 .main-slider-four__price {
-  color: var(--karoons-base, #2ECC71);
+  color: var(--karoons-base, black);
   font-size: 128px;
   font-weight: 800;
   line-height: 110px;

@@ -88,7 +88,7 @@ export default {
       } else if (width < 1200) {
         itemsPerPage.value = 5;
       } else {
-        itemsPerPage.value = 7;
+        itemsPerPage.value = 6;
       }
       chunkedBrands.value = chunkArray(brands.value, itemsPerPage.value);
     };
