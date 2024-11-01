@@ -80,14 +80,15 @@ export default {
 
     const updateChunkedBrands = () => {
       const width = window.innerWidth;
+      
       if (width < 768) {
-        itemsPerPage.value = 1;
-      } else if (width < 1000) {
         itemsPerPage.value = 2;
-      } else if (width < 1200) {
+      } else if (width < 1000) {
         itemsPerPage.value = 3;
-      } else {
+      } else if (width < 1200) {
         itemsPerPage.value = 5;
+      } else {
+        itemsPerPage.value = 7;
       }
       chunkedBrands.value = chunkArray(brands.value, itemsPerPage.value);
     };
