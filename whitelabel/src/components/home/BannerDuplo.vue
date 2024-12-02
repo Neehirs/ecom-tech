@@ -29,7 +29,7 @@ export default {
         {
           subTitle: "Ofertas Imperdíveis",
           title: "iPhone 16 ",
-         /*  text: "Desfrute da tecnologia avançada do novo iPhone 16 Pro Max com até 40% de desconto. Não perca!", */
+          /*  text: "Desfrute da tecnologia avançada do novo iPhone 16 Pro Max com até 40% de desconto. Não perca!", */
           link: "products.html",
           image: require('@/assets/images/banners/banner01.jpg'),
           className: "cta-five__item--light",
@@ -100,10 +100,12 @@ export default {
 }
 
 .title {
-  font-size: 30px; /* Aumenta o tamanho do título */
+  font-size: 30px;
+  /* Aumenta o tamanho do título */
   margin: 10px 0;
   color: #fff;
-  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7); /* Sombra suave para destaque */
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
+  /* Sombra suave para destaque */
 }
 
 .text {

@@ -33,7 +33,7 @@
           <li class="topbar-four__info__item">
             <router-link :to="{ name: 'vendedores' }" class="sales-team-link">
               <i class="fab fa-whatsapp"></i>
-              <strong>Equipe de vendas</strong>
+              <strong>Equipe</strong>
             </router-link>
           </li>
         </ul>

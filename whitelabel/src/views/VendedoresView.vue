@@ -1,7 +1,7 @@
 <template>
   <div class="vendedores">
     <div class="block-title">
-      <h1>Nossos Vendedores</h1>
+      <h1>Nossos Equipe</h1>
       <p>Conheça nossa equipe dedicada, pronta para te ajudar!</p>
     </div>
 
