@@ -13,7 +13,8 @@ import {
   ScrollView,
   Animated,
   Platform,
-  LogBox
+  LogBox,
+  Keyboard
 } from 'react-native';
 
 // Ignorar avisos específicos que podem estar causando problemas
@@ -77,6 +78,13 @@ const ProductList = () => {
   
   useEffect(() => {
     loadProducts();
+    
+    // Limpar o timeout quando o componente for desmontado
+    return () => {
+      if (searchTimeout.current) {
+        clearTimeout(searchTimeout.current);
+      }
+    };
   }, []);
 
   // Efeito para rolar para o topo quando os produtos são atualizados
@@ -101,10 +109,12 @@ const ProductList = () => {
       setPagination(result.pagination);
       setLoading(false);
       setLoadingMore(false);
+      setIsSearching(false);
     } catch (err) {
       setError('Falha ao carregar produtos: ' + err.message);
       setLoading(false);
       setLoadingMore(false);
+      setIsSearching(false);
     }
   };
 
@@ -123,11 +133,50 @@ const ProductList = () => {
     }
   };
 
+  // Referência para o timeout de debounce
+  const searchTimeout = useRef(null);
+  
+  // Indicador visual de que a busca está em andamento
+  const [isSearching, setIsSearching] = useState(false);
+  
   // Função para lidar com a mudança no campo de busca
   const handleSearchChange = (text) => {
     setSearchQuery(text);
-    // Recarregar produtos com a nova busca
-    loadProducts(1, text, sortOption);
+    
+    // Limpar o timeout anterior se existir
+    if (searchTimeout.current) {
+      clearTimeout(searchTimeout.current);
+      setIsSearching(false);
+    }
+    
+    if (text.trim().length > 0) {
+      setIsSearching(true);
+    }
+    
+    // Configurar um novo timeout (1000ms de debounce)
+    searchTimeout.current = setTimeout(() => {
+      if (text.trim().length > 0) {
+        loadProducts(1, text, sortOption);
+      }
+      setIsSearching(false);
+    }, 1000);
+  };
+  
+  // Função para lidar com a submissão da pesquisa (quando o usuário pressiona Enter)
+  const handleSearchSubmit = () => {
+    // Limpar qualquer timeout pendente
+    if (searchTimeout.current) {
+      clearTimeout(searchTimeout.current);
+    }
+    
+    setIsSearching(false);
+    
+    // Executar a pesquisa imediatamente apenas se houver texto
+    if (searchQuery.trim().length > 0) {
+      console.log('Pesquisa submetida:', searchQuery);
+      loadProducts(1, searchQuery, sortOption);
+    }
+    Keyboard.dismiss();
   };
 
   // Função para lidar com a mudança na ordenação
@@ -332,22 +381,49 @@ const ProductList = () => {
           style={styles.searchOverlay}
         >
           <View style={styles.searchInputContainer}>
+            {isSearching && (
+              <ActivityIndicator 
+                size="small" 
+                color="#fff" 
+                style={{marginRight: 8}} 
+              />
+            )}
             <TextInput
               style={styles.searchInput}
               placeholder="Buscar produtos..."
               value={searchQuery}
               onChangeText={handleSearchChange}
+              onSubmitEditing={handleSearchSubmit}
+              returnKeyType="search"
               placeholderTextColor="rgba(255,255,255,0.7)"
               autoFocus
               selectionColor="rgba(255,255,255,0.5)"
+              autoCapitalize="none"
+              autoCorrect={false}
             />
-            <TouchableOpacity 
-              style={styles.clearButton} 
-              onPress={() => toggleSearch()}
-              activeOpacity={0.7}
-            >
-              <Text style={styles.clearButtonText}>✕</Text>
-            </TouchableOpacity>
+            {searchQuery ? (
+              <TouchableOpacity 
+                style={styles.clearButton} 
+                onPress={() => {
+                  setSearchQuery('');
+                  if (searchTimeout.current) {
+                    clearTimeout(searchTimeout.current);
+                  }
+                  loadProducts(1, '', sortOption);
+                }}
+                activeOpacity={0.7}
+              >
+                <Text style={styles.clearButtonText}>✕</Text>
+              </TouchableOpacity>
+            ) : (
+              <TouchableOpacity 
+                style={styles.searchButton} 
+                onPress={handleSearchSubmit}
+                activeOpacity={0.7}
+              >
+                <Text style={styles.searchButtonText}>🔍</Text>
+              </TouchableOpacity>
+            )}
           </View>
         </View>
       )}
@@ -490,6 +566,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2,
     shadowRadius: 8,
     elevation: 5,
+    paddingLeft: 15,
   },
   searchInput: {
     flex: 1,
@@ -507,6 +584,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   clearButtonText: {
+    fontSize: 14,
+    color: '#fff',
+    fontWeight: 'bold',
+  },
+  searchButton: {
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    backgroundColor: 'rgba(255,255,255,0.2)',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  searchButtonText: {
     fontSize: 14,
     color: '#fff',
     fontWeight: 'bold',

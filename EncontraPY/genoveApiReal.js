@@ -38,21 +38,36 @@ export const formatPrice = (price, moedaId = DEFAULT_MOEDA_ID) => {
   })}`;
 };
 
-export const fetchGenoveProducts = async (page = 1, params = {}) => {
+export const fetchGenoveProducts = async (page = 1, query = '', sort = 'default') => {
   try {
-    const moedaId = params.moeda_id || DEFAULT_MOEDA_ID;
+    const params = { moeda_id: DEFAULT_MOEDA_ID };
+    
+    // Adicionar parâmetro de busca se houver texto
+    if (query && query.trim() !== '') {
+      params.text = query.trim();
+      console.log('Buscando por:', params.text);
+    }
+    
+    // Adicionar parâmetro de ordenação
+    if (sort && sort !== 'default') {
+      params.sort = sort;
+    }
+    
+    console.log('Parâmetros da API:', params);
     
     const response = await api.get('api/public/products', { 
-      params: { ...params, moeda_id: moedaId, page } 
+      params: { ...params, page } 
     });
     
     const productData = response.data;
+    
+    console.log('Resposta da API:', productData.current_page, 'de', productData.last_page, 'total:', productData.total);
     
     // Formatar preços e mapear para o formato esperado pelo app
     if (productData.data && Array.isArray(productData.data)) {
       const products = productData.data.map(product => {
         const price = product.valor_venda || 0;
-        const formattedPrice = formatPrice(parseFloat(price), moedaId);
+        const formattedPrice = formatPrice(parseFloat(price), DEFAULT_MOEDA_ID);
         
         return {
           id: product.id.toString(),
